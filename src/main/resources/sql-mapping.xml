@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-mappings-list>
+
+	<named-query name="org.guduo.api.getComments"><![CDATA[
+		SELECT `content` as text FROM
+		video_comments c
+		WHERE c.sub_vid IN (${})
+	]]></named-query>
+
+</sql-mappings-list>

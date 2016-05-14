@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{MM-dd HH:mm:ss} [%thread] %-5level %logger{56} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/opt/tingyun/sign/logs/sign.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/opt/tingyun/sign/logs/sign.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxHistory>15</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{86} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.tingyun" level="DEBUG" />
+	
+	<!--log4jdbc -->
+	<logger name="jdbc.sqltiming" level="DEBUG" />
+	<logger name="jdbc" level="WARN" />
+	
+	<root level="INFO">
+		<appender-ref ref="rollingFile" />
+	</root>
+</configuration>
